@@ -1,0 +1,30 @@
+{
+    "options": {
+        "name": "TMT",
+        "description": "Komplettexport",
+        "export_optinomic_ids": false,
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "tmt"
+    },
+
+  "fields": [
+    { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID" },
+    { "path": "survey_response.response.Messzeitpunkt", "name": "Messzeitpunkt" },
+    { "path": "_function", "function": "var resp = source.survey_response.response; if ('Date' in resp) {return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date)} else {return ExportHelpers.formatDateCH(source.survey_response.filled)};", "name": "Datum"},
+    { "path": "patient.gender", "name": "Geschlecht" },
+    { "path": "calculation.percentile.education", "name": "Bildungsgruppe" },
+    { "path": "survey_response.response.Ausbildungsjahre", "name": "Ausbildungsjahre" },
+    { "path": "calculation.percentile.age_perz.altersgruppe", "name": "Altersgruppe" },
+    { "path": "patient.extras.age_when_filled", "name": "Alter" },
+    { "path": "survey_response.response.TMTATime", "name": "TMTATime" },
+    { "path": "survey_response.response.TMTAError", "name": "TMTAError" },
+    { "path": "calculation.percentile.z_scores.tmtA_z_rounded", "name": "TMT_A_z" },
+    { "path": "survey_response.response.TMTBTime", "name": "TMTBTime" },
+    { "path": "survey_response.response.TMTBError", "name": "TMTBError" },
+    { "path": "calculation.percentile.z_scores.tmtB_z_rounded", "name": "TMT_B_z" },
+    { "path": "calculation.percentile.z_scores.quotient_rounded", "name": "BAquotient" }
+  ]
+}
